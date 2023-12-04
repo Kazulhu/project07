@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Project 07 Part 1</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>Project 07 Part 1</h1>
+        </header>
+
+        <main id="app" class="main-content">
+            <section @click="isFlipped = !isFlipped" class="card">
+                <h2 v-if="!isFlipped">{{ objects[index].title }}</h2>
+                <p v-if="isFlipped">{{ objects[index].description }}</p>
+                <img :src="objects[index].image" :alt="objects[index].description">   
+            </section>
+
+            <div class="buttons">
+                <button @click="move(-1)" type="button">Previous</button>
+                <button @click="move(1)" type="button">Next</button>
+            </div>
+            <hr>
+        </main>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="data/data.js"></script>
+    <script src="js/script.js">
+    </script>
+
+    <script>
+        const javaPackagesApp = {
+            data() {
+                return {
+                    index: 0,
+                    objects,
+                    isFlipped: false,
+                }
+            },
+
+            methods: {
+
+                move(change) {
+
+                    if (this.objects[this.index + change]) {
+                        this.index += change;
+                        this.isFlipped = false;
+                    }
+                }
+            }
+        } 
+        const app = Vue.createApp(javaPackagesApp).mount("#app");
+    </script>
+</body>
+
+</html>
